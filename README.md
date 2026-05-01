@@ -49,11 +49,6 @@ mvn test -Dtest="LoginTest#testInvalidLogin"
 mvn test -Dtest="MessageQueueTest#testEnqueueAndDequeue"
 ```
 
-**Test 4 — Enqueue single message to `single-msg` queue**
-```bash
-mvn test -Dtest="SingleMessageQueueTest#testEnqueueSingleMessage"
-```
-
 ---
 
 ## Screenshots
