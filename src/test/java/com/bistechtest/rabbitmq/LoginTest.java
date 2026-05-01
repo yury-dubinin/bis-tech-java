@@ -22,6 +22,20 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 @DisplayName("RabbitMQ Management Login")
 class LoginTest extends BaseTest {
 
+    static class User {
+        final String name;
+        final String password;
+
+        /** Defaults to the built-in {@code guest / guest} account. */
+        User() {
+            this("guest", "guest");
+        }
+
+        User(String name, String password) {
+            this.name     = name;
+            this.password = password;
+        }
+    }
     /**
      * Test 1 — Valid credentials.
      *
@@ -36,14 +50,15 @@ class LoginTest extends BaseTest {
     @Test
     @DisplayName("Test 1 — successful login with default credentials")
     void testSuccessfulLogin() {
+        User user = new User();
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigate();
-        loginPage.login("guest", "guest");
+        loginPage.login(user.name, user.password);
 
         // After a successful login the management console redirects to /#/ (or /#/overview).
         // PlaywrightAssertions.assertThat(page).hasURL() retries until the condition is met.
         assertThat(page).hasURL(Pattern.compile(".*#/.*"));
-        assertThat(page.locator("a[href='#/users/guest']")).isVisible();
+        assertThat(page.locator("a[href='#/users/" + user.name + "']")).isVisible();
         loginPage.screenshot("01-logged-in.png");
     }
 
@@ -61,9 +76,10 @@ class LoginTest extends BaseTest {
     @Test
     @DisplayName("Test 2 — invalid credentials are rejected")
     void testInvalidLogin() {
+        User user = new User("wrongUser", "wrongPassword");
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigate();
-        loginPage.login("wrongUser", "wrongPassword");
+        loginPage.login(user.name, user.password);
 
         // The management UI renders a "Not_Authorized" message on authentication failure.
         assertThat(page.getByText("Not_Authorized")).isVisible();
