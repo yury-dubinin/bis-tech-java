@@ -30,6 +30,18 @@ mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI \
 mvn test
 ```
 
+> **Headed mode (watch the browser locally)**
+> By default the browser runs headless. To see it during a local run, open
+> `src/test/java/com/bistechtest/rabbitmq/BaseTest.java` and change:
+> ```java
+> new BrowserType.LaunchOptions().setHeadless(true).setSlowMo(500)
+> ```
+> to:
+> ```java
+> new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(500)
+> ```
+> Remember to revert this before pushing — the CI workflow requires headless mode.
+
 ---
 
 ## Run each test separately
