@@ -37,6 +37,16 @@ public class QueueDetailPage extends BasePage {
     }
 
     /**
+     * Selects an ack mode from the {@code select[name="ackmode"]} dropdown.
+     *
+     * @param value the {@code <option value>} to select, e.g. {@code "ack_requeue_false"}
+     *              for "Automatic ack"
+     */
+    public void selectAckMode(String value) {
+        page.locator("select[name='ackmode']").selectOption(value);
+    }
+
+    /**
      * Submits the "Get messages" form by clicking the "Get Message(s)" button.
      * Playwright's auto-wait ensures the button is actionable before clicking.
      */

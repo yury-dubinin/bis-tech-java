@@ -150,6 +150,7 @@ class MessageQueueTest extends BaseTest {
         QueueDetailPage queueDetailPage = new QueueDetailPage(page);
         queueDetailPage.expandGetMessagesSection();
         queueDetailPage.setMessageCount(1);
+        queueDetailPage.selectAckMode("ack_requeue_false");
         queueDetailPage.clickGetMessages();
 
         // The management UI renders the payload inside <pre class="msg-payload">.
