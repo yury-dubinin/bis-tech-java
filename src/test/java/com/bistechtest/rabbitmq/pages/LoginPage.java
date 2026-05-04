@@ -1,5 +1,6 @@
 package com.bistechtest.rabbitmq.pages;
 
+import com.bistechtest.rabbitmq.TestConfig;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
@@ -8,7 +9,7 @@ import com.microsoft.playwright.Page;
  */
 public class LoginPage extends BasePage {
 
-    private static final String URL = "http://localhost:15672/";
+    private static final String URL = TestConfig.MANAGEMENT_URL;
 
     public LoginPage(Page page) {
         super(page);

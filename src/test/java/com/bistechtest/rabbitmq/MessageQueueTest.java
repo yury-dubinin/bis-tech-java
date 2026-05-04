@@ -48,7 +48,6 @@ class MessageQueueTest extends BaseTest {
 
     static final String QUEUE_NAME   = "test-queue";
     static final String MESSAGE_BODY = "Hello RabbitMQ-" + java.util.UUID.randomUUID();
-    static final String AMQP_URI     = "amqp://guest:guest@localhost:5672/%2f";
 
     static Environment amqpEnvironment;
     static Connection  amqpConnection;
@@ -62,7 +61,7 @@ class MessageQueueTest extends BaseTest {
         // Build the AMQP 1.0 environment and open a connection to the broker.
         amqpEnvironment = new AmqpEnvironmentBuilder()
                 .connectionSettings()
-                .uri(AMQP_URI)
+                .uri(TestConfig.AMQP_URI)
                 .environmentBuilder()
                 .build();
 
