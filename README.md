@@ -77,6 +77,32 @@ Tests 1–3 save full-page screenshots to `target/screenshots/`:
 
 ---
 
+## Cucumber tests
+
+Login scenarios are also expressed as Gherkin features in
+`src/test/resources/features/login.feature`.
+
+**Run all Cucumber scenarios (included in `mvn test`)**
+```bash
+mvn test -Dtest="LoginCucumberTest"
+```
+
+**Feature file location**
+```
+src/test/resources/features/login.feature
+```
+
+**Step definitions**
+```
+src/test/java/com/bistechtest/rabbitmq/cucumber/LoginSteps.java
+```
+
+Scenarios covered:
+- Successful login redirects to the management console
+- Invalid credentials are rejected and an error is shown
+
+---
+
 ## Stop RabbitMQ
 
 ```bash
