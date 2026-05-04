@@ -48,7 +48,6 @@ class MessageQueueTest extends BaseTest {
 
     static final String QUEUE_NAME   = "test-queue";
     static final String MESSAGE_BODY = "Hello RabbitMQ-" + java.util.UUID.randomUUID();
-    static final String AMQP_URI     = "amqp://guest:guest@localhost:5672/%2f";
 
     static Environment amqpEnvironment;
     static Connection  amqpConnection;
@@ -59,12 +58,10 @@ class MessageQueueTest extends BaseTest {
 
     @BeforeAll
     static void enqueueMessage() throws Exception {
-        java.nio.file.Files.createDirectories(java.nio.file.Paths.get("target/screenshots"));
-
         // Build the AMQP 1.0 environment and open a connection to the broker.
         amqpEnvironment = new AmqpEnvironmentBuilder()
                 .connectionSettings()
-                .uri(AMQP_URI)
+                .uri(TestConfig.AMQP_URI)
                 .environmentBuilder()
                 .build();
 
@@ -150,6 +147,7 @@ class MessageQueueTest extends BaseTest {
         QueueDetailPage queueDetailPage = new QueueDetailPage(page);
         queueDetailPage.expandGetMessagesSection();
         queueDetailPage.setMessageCount(1);
+        queueDetailPage.selectAckMode("ack_requeue_false");
         queueDetailPage.clickGetMessages();
 
         // The management UI renders the payload inside <pre class="msg-payload">.
