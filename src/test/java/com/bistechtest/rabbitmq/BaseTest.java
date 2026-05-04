@@ -1,5 +1,9 @@
 package com.bistechtest.rabbitmq;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -31,7 +35,8 @@ public abstract class BaseTest {
     Page page;
 
     @BeforeAll
-    static void launchBrowser() {
+    static void launchBrowser() throws IOException {
+        Files.createDirectories(Paths.get("target/screenshots"));
         playwright = Playwright.create();
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions().setHeadless(true).setSlowMo(500)

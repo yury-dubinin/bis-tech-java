@@ -59,8 +59,6 @@ class MessageQueueTest extends BaseTest {
 
     @BeforeAll
     static void enqueueMessage() throws Exception {
-        java.nio.file.Files.createDirectories(java.nio.file.Paths.get("target/screenshots"));
-
         // Build the AMQP 1.0 environment and open a connection to the broker.
         amqpEnvironment = new AmqpEnvironmentBuilder()
                 .connectionSettings()
