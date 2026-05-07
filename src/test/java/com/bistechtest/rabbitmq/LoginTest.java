@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.bistechtest.rabbitmq.pages.LoginPage;
+import com.bistechtest.rabbitmq.pages.ManagementPage;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /**
@@ -87,5 +88,20 @@ class LoginTest extends BaseTest {
         // The login form must still be present — no redirect to the management console.
         assertThat(page.locator("#username")).isVisible();
         loginPage.screenshot("02-login-failed.png");
+    }
+
+    @Test
+    @DisplayName("Test 4 — login and logout")
+    void testLoginAndLogout() {
+        User user = new User();
+        LoginPage loginPage = new LoginPage(page);
+        loginPage.navigate();
+        loginPage.login(user.name, user.password);
+
+        ManagementPage managementPage = new ManagementPage(page);
+        managementPage.clickLogOut();
+
+        // The login form must still be present.
+        assertThat(page.locator("#username")).isVisible();
     }
 }

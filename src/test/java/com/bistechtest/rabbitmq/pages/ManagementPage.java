@@ -31,6 +31,10 @@ public class ManagementPage extends BasePage {
                 new Page.GetByRoleOptions().setName("Queues and streams")).click();
     }
 
+    public void clickLogOut() {
+        page.locator("input[value='Log out']").click();
+    }
+
     /**
      * Clicks the link for the given queue name in the queue list table.
      * Uses {@code .first()} to handle scenarios where the name appears in both a
